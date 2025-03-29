@@ -7,6 +7,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 
@@ -37,9 +38,9 @@ public class ValenbiciApi {
  
                 String result = EntityUtils.toString(entity);
  
-                System.out.println("Respuesta de la API:");
+                //System.out.println("Respuesta de la API:");
  
-                System.out.println(result);
+                //System.out.println(result);
 
                 // Intentamos procesar la respuesta como JSON
  
@@ -49,15 +50,21 @@ public class ValenbiciApi {
 
                     JSONArray resultsArray = jsonObject.getJSONArray("results");
 
-                    JSONObject jsonElement = resultsArray.getJSONObject(0);
+                   for (int i = 0; i < resultsArray.length(); i++){
 
-                    System.out.println(jsonElement.get("address"));
+                       System.out.println("Estación Nº"+(i+1));
+                       System.out.println("\tEstación "+resultsArray.getJSONObject(i).get("address"));
+                       System.out.println("\tBicicletas disponibles "+resultsArray.getJSONObject(i).get("available"));
+                       System.out.println("\tEspacios disponibles "+resultsArray.getJSONObject(i).get("free")+"\n");
+                   }
+
+                    //System.out.println(jsonElement.get("address"));
 
                     // Recorre el vector resultsArray mostrando los datos solicitados.
  
-                } catch (org.json.JSONException e) {
+                } catch (JSONException e) {
  
-// Si la respuesta no es un array JSON, imprimimos el mensaje de error
+                    // Si la respuesta no es un array JSON, imprimimos el mensaje de error
  
                     System.err.println("Error al procesar los datos JSON: " + e.getMessage());
  
