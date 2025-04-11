@@ -52,13 +52,15 @@ public class ValenbiciApi {
 
                    for (int i = 0; i < resultsArray.length(); i++){
 
+                       System.out.println(resultsArray.getJSONObject(i).toString());
+
                        System.out.println("Estación Nº"+(i+1));
                        System.out.println("\tEstación "+resultsArray.getJSONObject(i).get("address"));
                        System.out.println("\tBicicletas disponibles "+resultsArray.getJSONObject(i).get("available"));
                        System.out.println("\tEspacios disponibles "+resultsArray.getJSONObject(i).get("free")+"\n");
                    }
 
-                    //System.out.println(jsonElement.get("address"));
+                   
 
                     // Recorre el vector resultsArray mostrando los datos solicitados.
  
